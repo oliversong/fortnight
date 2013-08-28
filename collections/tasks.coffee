@@ -1,4 +1,4 @@
-@Tasks = new Meteor.Collections('tasks')
+@Tasks = new Meteor.Collections 'tasks'
 
 Tasks.allow(
   update: ownsDocument

@@ -2,6 +2,7 @@
   "packages": {
     "router": {},
     "errors": {},
-    "accounts-ui-bootstrap-dropdown": {}
+    "accounts-ui-bootstrap-dropdown": {},
+    "spin": {}
   }
 }
