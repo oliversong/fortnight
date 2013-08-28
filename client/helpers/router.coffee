@@ -1,6 +1,10 @@
 Meteor.Router.add
-  '/': 'index'
-  '/home': 'home'
+  '/': (->
+    if Meteor.user()
+      return 'homePage'
+    else
+      return 'landingPage'
+  )
   '/settings': 'settings'
 
 Meteor.Router.filters

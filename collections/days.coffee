@@ -1,1 +1,1 @@
-@Days = new Meteor.Collections 'days'
+@Days = new Meteor.Collection 'days'
