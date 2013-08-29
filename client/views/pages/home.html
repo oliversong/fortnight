@@ -1,0 +1,17 @@
+<template name="homePage">
+  <div class="thisWeek">
+    {{#each weekdays}}
+      {{> day}}
+    {{/each}}
+  </div>
+  <div class="thisWeekPlan">
+    {{#each weekdays}}
+      {{> plan}}
+    {{/each}}
+  </div>
+  <div class="nextWeek">
+    {{#each weekdays}}
+      {{> day}}
+    {{/each}}
+  </div>
+</template>
