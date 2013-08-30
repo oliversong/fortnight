@@ -1,6 +1,6 @@
 <template name="homePage">
   <div class="thisWeek">
-    {{#each weekdays}}
+    {{#each firstWeekTasks}}
       {{> day}}
     {{/each}}
   </div>
@@ -10,8 +10,13 @@
     {{/each}}
   </div>
   <div class="nextWeek">
-    {{#each weekdays}}
+    {{#each secondWeekTasks}}
       {{> day}}
+    {{/each}}
+  </div>
+  <div class="dayNames">
+    {{#each getDayNames}}
+      {{this}}
     {{/each}}
   </div>
 </template>
