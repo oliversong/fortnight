@@ -19,9 +19,13 @@ getTasks = (which)->
   if which is 'first'
     firstDay = timestamp - (dayNumber)*secondsPerDay # monday of first week
     lastDay = firstDay + 6*secondsPerDay # sunday of first week
+    firstIndex = 0
+    lastIndex = 6
   else if which is 'second'
     firstDay = timestamp + (7-dayNumber)*secondsPerDay # monday of second week
     lastDay = firstDay + 6*secondsPerDay # sunday of second week
+    firstIndex = 7
+    lastIndex = 13
   else
     console.log "wat are you doing"
 
@@ -30,14 +34,44 @@ getTasks = (which)->
   # find relevant tasks
   tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
   # sort tasks in to their buckets, then return the buckets
-  buckets = [[], [], [], [], [], [], []]
+  buckets = [{dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}]
 
   for task in tasks
     # get day index (timestamp - monday timestamp) / secondsPerDay
     dayIndex = (task.due - timestamp) / secondsPerDay
     # put task in the correct bucket for index
-    buckets[dayIndex%7].push task
+    buckets[dayIndex%7]['tasks'].push task
+
+  # populate names of days
+  dayNames = getDayNames()
+  for day in [firstIndex..lastIndex]
+    buckets[day%7]["dayName"] = dayNames[day]
+
   buckets
+
+getDayNames = ()->
+  weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  msPerDay = 86400000
+  date = new Date()
+  start = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  timestamp = start.getTime()
+  dayIndex = moveSundayBack(start.getDay())
+  # move this back to the last monday
+  mondayTimestamp = timestamp - (dayIndex+1) * msPerDay
+  debugger
+  currentDate = new Date(mondayTimestamp)
+  dayNames = []
+
+  for x in [0..13]
+    dayName = weekdays[currentDate.getDay()]
+    dayMonth = currentDate.getMonth()
+    dayDate = currentDate.getDate()
+    name = dayName + " " + dayMonth + "/" + dayDate
+    dayNames.push(name)
+    # go to tomorrow
+    currentDate = new Date(currentDate.getTime() + msPerDay)
+
+  dayNames
 
 
 Template.homePage.helpers(
@@ -46,29 +80,6 @@ Template.homePage.helpers(
 
   secondWeekTasks: ()->
     getTasks("second")
-
-  getDayNames: ()->
-    weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    msPerDay = 86400000
-    date = new Date()
-    start = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-    timestamp = start.getTime()
-    dayIndex = moveSundayBack(start.getDay())
-    # move this back to the last monday
-    mondayTimestamp = timestamp - dayIndex * msPerDay
-    currentDate = new Date(mondayTimestamp)
-    dayNames = []
-
-    for x in [0..13]
-      dayName = weekdays[currentDate.getDay()]
-      dayMonth = currentDate.getMonth()
-      dayDate = currentDate.getDate()
-      name = dayName + " " + dayMonth + "/" + dayDate
-      dayNames.push(name)
-      # go to tomorrow
-      currentDate = new Date(currentDate.getTime() + msPerDay)
-
-    dayNames
 
   weekdays: ()->
     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]

@@ -1,9 +1,8 @@
 <template name="day">
   <div class="day">
-    <!-- title...how do I get this here? -->
-    Day
+    {{ this.dayName }}
     <!-- task inputter -->
-    {{#each this}}
+    {{#each this.tasks }}
       {{> task}}
     {{/each}}
   </div>
