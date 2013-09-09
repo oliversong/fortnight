@@ -57,13 +57,13 @@ getDayNames = ()->
   timestamp = start.getTime()
   dayIndex = moveSundayBack(start.getDay())
   # move this back to the last monday
-  mondayTimestamp = timestamp - (dayIndex+1) * msPerDay
+  mondayTimestamp = timestamp - (dayIndex) * msPerDay
   currentDate = new Date(mondayTimestamp)
   dayNames = []
 
   for x in [0..13]
-    dayName = weekdays[currentDate.getDay()]
-    dayMonth = currentDate.getMonth()
+    dayName = weekdays[moveSundayBack(currentDate.getDay())]
+    dayMonth = currentDate.getMonth() + 1
     dayDate = currentDate.getDate()
     name = dayName + " " + dayMonth + "/" + dayDate
     dayNames.push(name)
