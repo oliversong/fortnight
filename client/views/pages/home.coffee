@@ -58,7 +58,6 @@ getDayNames = ()->
   dayIndex = moveSundayBack(start.getDay())
   # move this back to the last monday
   mondayTimestamp = timestamp - (dayIndex+1) * msPerDay
-  debugger
   currentDate = new Date(mondayTimestamp)
   dayNames = []
 

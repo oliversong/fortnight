@@ -1,15 +1,15 @@
 <template name="homePage">
-  <div class="thisWeek">
+  <div class="span4 weekColumn thisWeek">
     {{#each firstWeekTasks}}
       {{> day}}
     {{/each}}
   </div>
-  <div class="thisWeekPlan">
+  <div class="span4 planColumn thisWeekPlan">
     {{#each weekdays}}
-      {{> plan}}
+      {{> planday}}
     {{/each}}
   </div>
-  <div class="nextWeek">
+  <div class="span4 weekColumn nextWeek">
     {{#each secondWeekTasks}}
       {{> day}}
     {{/each}}
