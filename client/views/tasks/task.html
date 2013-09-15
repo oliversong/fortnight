@@ -2,5 +2,15 @@
   <div class="task">
     I am a task.
     {{ name }}
+
+    <input class="toggle pull-left" type="checkbox" {{ checked }}>
+    <div class="taskName pull-left {{#done}}' checked'{{else}}''{{/done}}">{{ name }}</div>
+    <div class="input-append taskInputter">
+      <input class="span2 nameEdit" type="text" value="{{ name }}" placeholder="Task name">
+        <span class="add-on"> ~ </span>
+        <input class="span1 estimateEdit" placeholder="1 hour" type="text" value="{{ duration }}"> 
+    </div>
+    <div class='inputCover'></div>
+    <i class="pull-right icon-remove-sign deleteTask"></i>
   </div>
 </template>

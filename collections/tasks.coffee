@@ -6,7 +6,7 @@ Tasks.allow(
 )
 
 Meteor.methods(
-  task: (taskAttributes)->
+  makeTask: (taskAttributes)->
     user = Meteor.user()
 
     # user must be logged in
