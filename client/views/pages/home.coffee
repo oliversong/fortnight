@@ -1,14 +1,20 @@
+# Moves sunday back to last index
+# 0 -> 6
+# 1 -> 0
+# 2 -> 1
+# 3 -> 2, etc
 moveSundayBack = (index)->
-  # 0 -> 6
-  # 1 -> 0
-  # 2 -> 1
-  # 3 -> 2, etc
   if index is 0
     6
   else
     index - 1
 
-getTasks = (which)->
+# Input is an integer representing the target week.
+# 0 -> current week
+# 1 -> next week
+# -1 -> last week
+# Returns an ordered list of name, timestamp hashes
+buildData = (which)->
   secondsPerDay = 86400
   now = new Date()
   start = new Date(now.getFullYear(), now.getMonth(), now.getDate())
@@ -16,52 +22,43 @@ getTasks = (which)->
   timestamp = start / 1000
   # today's day index
   dayNumber = moveSundayBack(now.getDay())
-  if which is 'first'
-    firstDay = timestamp - (dayNumber)*secondsPerDay # monday of first week
-    lastDay = firstDay + 6*secondsPerDay # sunday of first week
-    firstIndex = 0
-    lastIndex = 6
-  else if which is 'second'
-    firstDay = timestamp + (7-dayNumber)*secondsPerDay # monday of second week
-    lastDay = firstDay + 6*secondsPerDay # sunday of second week
-    firstIndex = 7
-    lastIndex = 13
-  else
-    console.log "wat are you doing"
+  # move this back to the last monday
+  mondayTimestamp = timestamp - (dayNumber) * secondsPerDay
 
-  # build query
-  mongoQuery = { due: { $gte: firstDay, $lte: lastDay } }
-  # find relevant tasks
-  tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
-  # sort tasks in to their buckets, then return the buckets
-  buckets = [{dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}, {dayName: "", tasks:[]}]
+  # make bucket for every day, but leave task aggregating to the days
+  buckets = [
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0},
+    {'name':'','timestamp':0}
+  ]
 
-  for task in tasks
-    # get day index (timestamp - monday timestamp) / secondsPerDay
-    dayIndex = (task.due - timestamp) / secondsPerDay
-    # put task in the correct bucket for index
-    buckets[dayIndex%7]['tasks'].push task
+  firstIndex = 0 + 7 * which
+  lastIndex = firstIndex + 6
 
-  # populate names of days
-  dayNames = getDayNames()
-  for day in [firstIndex..lastIndex]
-    buckets[day%7]["dayName"] = dayNames[day]
+  # add timestamps to buckets
+  for count in [firstIndex..lastIndex]
+    buckets[count%7]['timestamp'] = mondayTimestamp + count * secondsPerDay
+
+  # add day names to buckets
+  dayNames = getDayNames(buckets[0]['timestamp']*1000)
+  for day in [0..6]
+    # TODO support negative week indices by adding to this modulus
+    buckets[day%7]['name'] = dayNames[day]
 
   buckets
 
-getDayNames = ()->
-  weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+getDayNames = (mondayTimestamp)->
+  debugger
   msPerDay = 86400000
-  date = new Date()
-  start = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-  timestamp = start.getTime()
-  dayIndex = moveSundayBack(start.getDay())
-  # move this back to the last monday
-  mondayTimestamp = timestamp - (dayIndex) * msPerDay
-  currentDate = new Date(mondayTimestamp)
+  weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   dayNames = []
+  currentDate = new Date(mondayTimestamp)
 
-  for x in [0..13]
+  for x in [0..6]
     dayName = weekdays[moveSundayBack(currentDate.getDay())]
     dayMonth = currentDate.getMonth() + 1
     dayDate = currentDate.getDate()
@@ -74,23 +71,10 @@ getDayNames = ()->
 
 
 Template.homePage.helpers(
-  firstWeekTasks: ()->
-    getTasks("first")
+  # Return ordered list of day names and timestamps [{'name':'Monday 10/26','timestamp':'13244653982'},{},{}...]
+  firstWeek: ()->
+    buildData(0)
 
-  secondWeekTasks: ()->
-    getTasks("second")
-
-  weekdays: ()->
-    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
+  secondWeek: ()->
+    buildData(1)
 )
-
-#buckets = (x for x in [firstDay...lastDay] by secondsPerDay)
-    # dayZip =
-    #   0: "Sunday"
-    #   1: "Monday"
-    #   2: "Tuesday"
-    #   3: "Wednesday"
-    #   4: "Thursday"
-    #   5: "Friday"
-    #   6: "Saturday"

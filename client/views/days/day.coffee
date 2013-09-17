@@ -1,4 +1,13 @@
 Template.day.helpers(
+  todayTasks: ()->
+    # `this` is the data object passed from day
+    dayBeginning = this.timestamp
+    dayEnd = this.timestamp + 86400
+    # build query
+    mongoQuery = { due: { $gte: dayBeginning, $lte: dayEnd} }
+    # find relevant tasks
+    tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
+    tasks
 )
 
 swapBack = (which)->

@@ -1,7 +1,7 @@
 <template name="day">
   <div class="day">
-    <span class="dayName">{{ this.dayName }}</span>
-    {{#each this.tasks }}
+    <span class="dayName">{{ this.name }}</span>
+    {{#each todayTasks}}
       {{> task}}
     {{/each}}
 
