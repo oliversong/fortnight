@@ -52,7 +52,6 @@ buildData = (which)->
   buckets
 
 getDayNames = (mondayTimestamp)->
-  debugger
   msPerDay = 86400000
   weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   dayNames = []

@@ -1,17 +1,37 @@
 Template.day.helpers(
+  heatmap: ()->
+    # find sum of times of today's tasks
+    # TODO: Is this redundant? Is it reactive?
+    # Can I store the tasks on the day object and reference that from here reactively?
+    # I'm not sure.
+    dayBeginning = this.timestamp
+    dayEnd = this.timestamp + 86400
+    mongoQuery = { due: { $gte: dayBeginning, $lte: dayEnd}, userId: Meteor.user()._id }
+    tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
+    totalTime = 0
+    for task in tasks
+      totalTime += task.estimate
+    color = switch
+      when totalTime is 0 then 'white'
+      when totalTime < 3601 then 'green'
+      when totalTime < 10801 then 'yellow'
+      else 'red'
+    color
+
   todayTasks: ()->
     # `this` is the data object passed from day
     dayBeginning = this.timestamp
     dayEnd = this.timestamp + 86400
     # build query
+    # mongoQuery = { due: { $gte: dayBeginning, $lte: dayEnd}, userId: Meteor.user()._id }
     mongoQuery = { due: { $gte: dayBeginning, $lte: dayEnd} }
     # find relevant tasks
     tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
+    console.log 'getting tasks, found ' + tasks.length
     tasks
 )
 
-swapBack = (which)->
-  debugger
+swapBack = (which, timestamp)->
   if which is 'keypress'
     $day = $(event.currentTarget).parent().parent()
   else if which is 'click cover'
@@ -25,24 +45,20 @@ swapBack = (which)->
   $cover = $($day.children()[$day.children().length-1])
 
   # get task info
-  task_name = inputter.children()[0].value
-  task_duration = inputter.children()[2].value
-  task_date = this_el.children()[0].innerHTML
-  if task_name == ''
+  taskName = $inputter.children()[0].value
+  taskDuration = $inputter.children()[2].value
+  if taskName == ''
     # if no name, exit without doing anything
-    herp.show()
-    inputter.hide()
-    cover.hide()
+    $herp.show()
+    $inputter.hide()
+    $cover.hide()
   else
-    if task_duration == ''
-      task_duration = '1 hour'
+    if taskDuration == ''
+      taskDuration = '1 hour'
     task =
-      name: task_name
-      date: task_date
-      length: task_duration
-      completed: false
-      id: -1
-      name: task_name
+      name: taskName
+      dueDate: timestamp
+      estimate: taskDuration
 
     # make a new task
     Meteor.call 'makeTask', task, (error, id)->
@@ -52,30 +68,15 @@ swapBack = (which)->
         if error.error is 302
           Meteor.Router.to('home', error.details)
 
-    # insert task html before herp el
-    # assign task the returned id from collection
-
-    # update heatmap
-    if new_task.details.estimate == undefined
-      this.total_time += 3600
-    else
-      this.total_time += parseInt(new_task.details.estimate)
-    this.update_heat()
+    # task should be reactively inserted!! :O :O
+    # heat should be reactively inserted!!
 
     # wrap up
-    herp.show()
-    inputter.hide()
-    $(inputter.children()[0]).val('')
-    $(inputter.children()[2]).val('')
-    cover.hide()
-
-updateHeat = ()->
-  color = switch
-    when this.total_time is 0 then '#FFF'
-    when this.total_time < 3601 then '#d6f5d8'
-    when this.total_time < 10801 then '#f8f4ba'
-    else '#f7aeae'
-  this.$el.css('background-color',color)
+    $herp.show()
+    $inputter.hide()
+    $($inputter.children()[0]).val('')
+    $($inputter.children()[2]).val('')
+    $cover.hide()
 
 Template.day.events(
   'click .herp': (e)->
@@ -89,10 +90,10 @@ Template.day.events(
     $cover.show()
 
   'click .inputCover': (e)->
-    swapBack('click cover')
+    swapBack('click cover', this.timestamp)
 
   'keypress .checker': (e)->
     if (e.keyCode == 13)
-      swapBack('keypress')
+      swapBack('keypress', this.timestamp)
 
 )

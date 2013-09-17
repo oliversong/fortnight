@@ -1,5 +1,5 @@
 <template name="day">
-  <div class="day">
+  <div class="day {{ heatmap }}">
     <span class="dayName">{{ this.name }}</span>
     {{#each todayTasks}}
       {{> task}}

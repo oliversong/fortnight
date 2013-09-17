@@ -16,13 +16,16 @@ Meteor.methods(
     if not taskAttributes.name
       throw new Meteor.Error(422, "Please fill in task name")
     # this should not be possible
-    if not taskAttributes.due
+    if not taskAttributes.dueDate
       throw new Meteor.Error(422, "How did you even do that?")
     # set default task estimate time
     if not taskAttributes.estimate
       taskAttributes.estimate = 3600
 
-    task = _.extend(_.pick(postAttributes, 'name', 'due', 'estimate'),
+    # convert estimate to seconds
+    taskAttributes.estimate = parseDuration(taskAttributes.estimate)
+
+    task = _.extend(_.pick(taskAttributes, 'name', 'dueDate', 'estimate'),
       userId: user._id
       completed: false
       planDates: []
@@ -31,3 +34,27 @@ Meteor.methods(
     taskId = Tasks.insert(task)
     taskId
 )
+
+# From http://sj26.com/2011/04/20/parse-natural-duration-javascript
+# TODO: Write a better one
+parseDuration = (duration) ->
+
+  # .75
+  if match = /^\.\d+$/.exec(duration)
+    parseFloat("0" + match[0]) * 3600
+
+  # 4 or 11.75
+  else if match = /^\d+(?:\.\d+)?$/.exec(duration)
+    parseFloat(match[0]) * 3600
+
+  # 01:34
+  else if match = /^(\d+):(\d+)$/.exec(duration)
+    (parseInt(match[1]) or 0) * 3600 + (parseInt(match[2]) or 0) * 60
+
+  # 1h30m or 7 hrs 1 min and 43 seconds
+  else if match = /(?:(\d+)\s*d(?:ay?)?s?)?(?:(?:\s+and|,)?\s+)?(?:(\d+)\s*h(?:(?:ou)?rs?)?)?(?:(?:\s+and|,)?\s+)?(?:(\d+)\s*m(?:in(?:utes?))?)?(?:(?:\s+and|,)?\s+)?(?:(\d)\s*s(?:ec(?:ond)?s?)?)?/.exec(duration)
+    (parseInt(match[1]) or 0) * 86400 + (parseInt(match[2]) or 0) * 3600 + (parseInt(match[3]) or 0) * 60 + (parseInt(match[4]) or 0)
+
+  # Unknown!
+  else
+    3600
