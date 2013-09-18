@@ -1,15 +1,13 @@
 Template.day.helpers(
   heatmap: ()->
-    console.log "heatmapping"
     # find sum of times of today's tasks
     # TODO: Is this redundant? Is it reactive?
     # Can I store the tasks on the day object and reference that from here reactively?
     # I'm not sure.
     dayBeginning = this.timestamp
     dayEnd = this.timestamp + 86400
-    mongoQuery = { due: { $gte: dayBeginning, $lte: dayEnd} }
+    mongoQuery = { dueDate: { $gte: dayBeginning, $lt: dayEnd} }
     tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
-    console.log tasks.length
     totalTime = 0
     for task in tasks
       debugger
