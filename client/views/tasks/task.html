@@ -1,13 +1,11 @@
 <template name="task">
-  <div class="task">
-    {{ name }}
-
+  <div class="task" id="task{{ id }}">
     <input class="toggle pull-left" type="checkbox" {{ checked }}>
-    <div class="taskName pull-left {{#done}}' checked'{{else}}''{{/done}}">{{ name }}</div>
+    <div class="taskName pull-left {{ checked }}">{{ name }}</div>
     <div class="input-append taskInputter">
-      <input class="span2 nameEdit" type="text" value="{{ name }}" placeholder="Task name">
+      <input class="span8 nameEdit" type="text" value="{{ name }}" placeholder="Task name">
         <span class="add-on"> ~ </span>
-        <input class="span1 estimateEdit" placeholder="1 hour" type="text" value="{{ duration }}"> 
+        <input class="span3 estimateEdit" placeholder="1 hour" type="text" value="{{ estimate }}"> 
     </div>
     <div class='inputCover'></div>
     <i class="pull-right icon-remove-sign deleteTask"></i>

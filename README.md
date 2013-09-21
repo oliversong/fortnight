@@ -5,7 +5,15 @@ Meteor version of demoknight
 
 # TODO
 
-1. Make heatmaps reactive.
+## MVP
+* Fix tasks
+* Drag and drop plans
+* Autoplan
+* Line up days (convert to tables?)
+
+## Phase 2
+* Move back and forward weeks
+* Design
 
 # Schema
   * Tasks

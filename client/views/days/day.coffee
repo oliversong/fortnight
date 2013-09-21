@@ -1,7 +1,7 @@
 Template.day.helpers(
   heatmap: ()->
     # find sum of times of today's tasks
-    # TODO: Is this redundant? Is it reactive?
+    # TODO: Is this redundant?
     # Can I store the tasks on the day object and reference that from here reactively?
     # I'm not sure.
     dayBeginning = this.timestamp
