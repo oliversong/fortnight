@@ -6,8 +6,7 @@ Template.planday.helpers(
     # build query
     mongoQuery = { timestamp: { $gte: dayBeginning, $lt: dayEnd} }
     # find relevant tasks
-    plans = Plans.find(mongoQuery, { sort: { due: -1 } }).fetch()
-    debugger
+    plans = Plans.find(mongoQuery, { sort: { timestamp: -1 } }).fetch()
     plans
 )
 

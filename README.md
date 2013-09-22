@@ -6,7 +6,6 @@ Meteor version of demoknight
 # TODO
 
 ## MVP
-* Drag and drop plans
 * Autoplan
 
 ## Phase 2

@@ -34,7 +34,7 @@ Meteor.methods(
     taskId = Tasks.insert(task)
     taskId
 
-  complete: (taskId)->
+  completeTask: (taskId)->
     user = Meteor.user()
     if not user
       throw new Meteor.Error(401, "You need to login to complete a task")
@@ -45,7 +45,7 @@ Meteor.methods(
       $set: {completed: true}
     })
 
-  uncomplete: (taskId)->
+  uncompleteTask: (taskId)->
     user = Meteor.user()
     if not user
       throw new Meteor.Error(401, "You need to login to uncomplete a task")
@@ -81,6 +81,7 @@ Meteor.methods(
       throw new Meteor.Error(401, "You need to login to uncomplete a task")
 
     Tasks.remove({_id: taskId})
+    Plans.remove({taskId: taskId})
 
 )
 

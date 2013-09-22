@@ -16,10 +16,10 @@ Template.task.events(
 
     unless checked
       # submit check
-      Meteor.call('complete', @_id)
+      Meteor.call('completeTask', @_id)
     else
       # submit uncheck
-      Meteor.call('uncomplete', @_id)
+      Meteor.call('uncompleteTask', @_id)
 
   'dblclick .taskName': (e)->
     $this_el = $(event.currentTarget).parent()

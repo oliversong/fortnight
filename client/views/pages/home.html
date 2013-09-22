@@ -1,20 +1,27 @@
 <template name="homePage">
-  <div class="span4 weekColumn thisWeek">
-    <h3>This week</h3>
-    {{#each firstWeek}}
-      {{> day}}
-    {{/each}}
+  <div class="row-fluid">
+    <div class="span12">
+      <button class="btn autoplan">Autoplan</button>
+    </div>
   </div>
-  <div class="span4 planColumn thisWeekPlan">
-    <h3>This week's plan</h3>
-    {{#each firstWeek}}
-      {{> planday}}
-    {{/each}}
-  </div>
-  <div class="span4 weekColumn nextWeek">
-    <h3>Next week</h3>
-    {{#each secondWeek}}
-      {{> day}}
-    {{/each}}
+  <div class="row-fluid">
+    <div class="span4 weekColumn thisWeek">
+      <h3>This week</h3>
+      {{#each firstWeek}}
+        {{> day}}
+      {{/each}}
+    </div>
+    <div class="span4 planColumn thisWeekPlan">
+      <h3>This week's plan</h3>
+      {{#each firstWeek}}
+        {{> planday}}
+      {{/each}}
+    </div>
+    <div class="span4 weekColumn nextWeek">
+      <h3>Next week</h3>
+      {{#each secondWeek}}
+        {{> day}}
+      {{/each}}
+    </div>
   </div>
 </template>
