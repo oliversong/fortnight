@@ -1,5 +1,8 @@
 <template name="planday">
   <div class="planday">
-    <span class="plandayName">Plan</span>
+    <span class="plandayName">{{ this.name }} plan</span>
+    {{#each todayPlans}}
+      {{> plan}}
+    {{/each}}
   </div>
 </template>

@@ -7,6 +7,7 @@
 }
 .dayName, .plandayName{
   text-decoration: underline;
+  font-weight: bold;
 }
 .inputCover{
   position: fixed;
@@ -16,6 +17,7 @@
   top: 0px;
   z-index: 1;
   display:none;
+  cursor:pointer;
 }
 .task{
   float:left;
@@ -29,6 +31,23 @@
     opacity: 0.5;
   }
 }
+.plan{
+  float:left;
+  width:100%;
+
+}
+.plan:hover{
+  background-color:#EEE;
+
+  .deletePlan{
+    opacity: 0.5;
+  }
+}
+.beta{
+  font-size:10px;
+  position:relative;
+  top:-10px;
+}
 .taskLength{
   width:80px;
 }
@@ -41,10 +60,10 @@
 .checked{
   text-decoration:line-through !important;
 }
-.deleteTask{
+.deleteTask, .deletePlan{
   opacity: 0;
 }
-.deleteTask:hover{
+.deleteTask:hover, .deletePlan:hover{
   opacity: 0.8 !important;
 }
 .estimateEdit{
