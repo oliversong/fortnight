@@ -5,12 +5,14 @@ Meteor version of demoknight
 
 # TODO
 
-## MVP
-* Autoplan
-
 ## Phase 2
+* Big projects monday aren't spread out over weekend appropriately
+* Highlight "today"
 * Move back and forward weeks
 * Line up days (convert to tables?) - shit, this might actually take javascript...
+* Preferences (weekends heavy, frontload, backload)
+* Rearrange plans (put on different days, split, etc)
+* Move to sunday-first :(
 * Design
 
 # Schema
