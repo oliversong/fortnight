@@ -68,7 +68,6 @@ getDayNames = (mondayTimestamp)->
 
   dayNames
 
-
 Template.homePage.helpers(
   # Return ordered list of day names and timestamps [{'name':'Monday 10/26','timestamp':'13244653982'},{},{}...]
   firstWeek: ()->

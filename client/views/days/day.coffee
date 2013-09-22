@@ -10,8 +10,7 @@ Template.day.helpers(
     tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
     totalTime = 0
     for task in tasks
-      debugger
-      totalTime += task.estimate
+      totalTime += task.duration
     color = switch
       when totalTime is 0 then 'white'
       when totalTime < 3601 then 'green'
@@ -33,7 +32,7 @@ Template.day.helpers(
 swapBack = (which, timestamp)->
   if which is 'keypress'
     $day = $(event.currentTarget).parent().parent()
-  else if which is 'click cover'
+  else if which is 'cover'
     $day = $(event.currentTarget).parent()
   else
     console.log 'invalid'
@@ -88,8 +87,8 @@ Template.day.events(
     $inputter.children()[0].focus()
     $cover.show()
 
-  'click .inputCover': (e)->
-    swapBack('click cover', this.timestamp)
+  'click .dayInputCover': (e)->
+    swapBack('cover', this.timestamp)
 
   'keypress .checker': (e)->
     if (e.keyCode == 13)

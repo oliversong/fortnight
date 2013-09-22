@@ -32,7 +32,7 @@ Template.task.events(
       $input_cover.show()
       $edit_field.focus()
 
-  'click .inputCover': (e)->
+  'click .taskInputCover': (e)->
     swapBack(this, 'cover')
 
   'keypress .nameEdit': (e)->
@@ -65,3 +65,8 @@ swapBack = (task, which)->
   $task_name.show()
   $edit_fields.hide()
   $input_cover.hide()
+
+Template.task.rendered = ()->
+  $(this.find('.task')).draggable(
+    revert: true
+  )

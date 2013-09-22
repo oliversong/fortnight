@@ -20,12 +20,12 @@ Meteor.methods(
       throw new Meteor.Error(422, "How did you even do that?")
     # set default task estimate time
     if not taskAttributes.estimate
-      taskAttributes.estimate = 3600
+      taskAttributes.estimate = '1 hour'
 
     # convert estimate to seconds
-    taskAttributes.estimate = parseDuration(taskAttributes.estimate)
+    taskAttributes.duration = parseDuration(taskAttributes.estimate)
 
-    task = _.extend(_.pick(taskAttributes, 'name', 'dueDate', 'estimate'),
+    task = _.extend(_.pick(taskAttributes, 'name', 'dueDate', 'estimate', 'duration'),
       userId: user._id
       completed: false
       planDates: []
@@ -64,15 +64,15 @@ Meteor.methods(
     if new_name is ''
       throw new Meteor.Error(422, "Please fill in task name")
     if new_estimate is ''
-      new_estimate = 3600
+      new_estimate = '1 hour'
+      new_duration = 3600
     else
-      new_estimate = parseDuration(new_estimate)
+      new_duration = parseDuration(new_estimate)
 
     Tasks.update({
       _id: taskId
     },{
-      # $set: {name: new_name}
-      $set: {estimate: new_estimate}
+      $set: {name: new_name, duration: new_duration, estimate: new_estimate}
     })
 
   deleteMe: (taskId)->
