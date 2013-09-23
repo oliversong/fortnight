@@ -92,6 +92,6 @@ Template.day.events(
 
   'keypress .checker': (e)->
     if (e.keyCode == 13)
-      swapBack('keypress', this.timestamp)
+      swapBack(e, 'keypress', this.timestamp)
 
 )
