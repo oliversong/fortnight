@@ -21,3 +21,4 @@ Meteor version of demoknight
 * iCal integration
 * Different ways of manipulating plans (put on different days, split, etc)
 * Autoplan Preferences (weekends heavy, frontload, backload)?
+* Drag tasks between days
