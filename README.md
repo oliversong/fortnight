@@ -6,6 +6,7 @@ Meteor version of demoknight
 
 ## Bugs
 * Weekend Autoplan: Big projects monday aren't spread out appropriately
+* Autoplan doesn't split big projects correctly at all
 * Autoplan shouldn't fill in plans for days that have already elapsed
 
 ## v1.0 release milestone
