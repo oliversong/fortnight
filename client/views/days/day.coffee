@@ -29,11 +29,11 @@ Template.day.helpers(
     tasks
 )
 
-swapBack = (which, timestamp)->
+swapBack = (e, which, timestamp)->
   if which is 'keypress'
-    $day = $(event.currentTarget).parent().parent()
+    $day = $(e.currentTarget).parent().parent()
   else if which is 'cover'
-    $day = $(event.currentTarget).parent()
+    $day = $(e.currentTarget).parent()
   else
     console.log 'invalid'
     return
@@ -78,7 +78,7 @@ swapBack = (which, timestamp)->
 
 Template.day.events(
   'click .herp': (e)->
-    $day = $(event.currentTarget).parent()
+    $day = $(e.currentTarget).parent()
     $herp_el = $($day.children()[$day.children().length-3])
     $inputter = $($day.children()[$day.children().length-2])
     $cover = $($day.children()[$day.children().length-1])
@@ -88,7 +88,7 @@ Template.day.events(
     $cover.show()
 
   'click .dayInputCover': (e)->
-    swapBack('cover', this.timestamp)
+    swapBack(e, 'cover', this.timestamp)
 
   'keypress .checker': (e)->
     if (e.keyCode == 13)

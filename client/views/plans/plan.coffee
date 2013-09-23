@@ -9,7 +9,7 @@ Template.plan.helpers(
 
 Template.plan.events(
   'click .toggle': (e)->
-    checked = $(event.currentTarget).next().hasClass('checked')
+    checked = $(e.currentTarget).next().hasClass('checked')
 
     unless checked
       # submit check
