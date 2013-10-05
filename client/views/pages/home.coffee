@@ -98,28 +98,26 @@ Template.homePage.events(
     secondWeekTasks = Tasks.find(secondWeekQuery, {sort: { due: -1}}).fetch()
 
     # get this week's plans
-    plansQuery = { timestamp: { $gte: weekBeginning, $lt: weekEnd} }
-    currentPlans = Plans.find(firstWeekQuery, {sort: { timestamp: -1 }}).fetch()
+    plansQuery = { timestamp: { $gte: timestamp, $lt: weekEnd} }
+    currentPlans = Plans.find(plansQuery, {sort: { timestamp: -1 }}).fetch()
 
     # build buckets and put plans into the buckets
-    buckets = [
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-      {timestamp:0,plans:[]},
-    ]
+    buckets= []
+    for i in [0..(6-dayNumber)]
+      buckets.push(
+        {timestamp:0,plans:[]}
+      )
     bucketMap = {}
-    for i in [0..6]
-      ts = weekBeginning + i*secondsPerDay
+    for i in [0..(6-dayNumber)]
+      ts = timestamp + i*secondsPerDay
       buckets[i].timestamp = ts
       bucketMap[ts] = i
     for plan in currentPlans
       for bucket in buckets
         if plan.timestamp is bucket.timestamp
           bucket.plans.push(plan)
+
+    debugger
 
     # FIRST WEEK
     for task in firstWeekTasks
@@ -172,9 +170,14 @@ Template.homePage.events(
     # fill in friday, saturday, sunday with big projects and monday, then fill up to the average of the week
     # find average plans / day in first week
     tot = 0
-    for i in [0..3]
-      tot += buckets[i].plans.length
-    avg = Math.max(Math.floor(tot / 4), 3)
+    if dayNumber < 5
+      for i in [0..3]
+        tot += buckets[i].plans.length
+      avg = Math.max(Math.floor(tot / 4), 3)
+    else
+      for i in [0..6-dayNumber]
+        tot += buckets[i].plans.length
+      avg = Math.max(Math.floor(tot / (7-dayNumber)), 3)
 
     # find all monday tasks, then tasks >3 hours in second week
     queued = []
