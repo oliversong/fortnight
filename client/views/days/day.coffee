@@ -27,6 +27,13 @@ Template.day.helpers(
     # find relevant tasks
     tasks = Tasks.find(mongoQuery, { sort: { due: -1 } }).fetch()
     tasks
+
+  today: ()->
+    if this.today
+      console.log "today!"
+      ' Today!'
+    else
+      ''
 )
 
 swapBack = (e, which, timestamp)->

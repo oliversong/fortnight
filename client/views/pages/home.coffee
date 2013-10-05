@@ -1,14 +1,3 @@
-# Moves sunday back to last index
-# 0 -> 6
-# 1 -> 0
-# 2 -> 1
-# 3 -> 2, etc
-moveSundayBack = (index)->
-  if index is 0
-    6
-  else
-    index - 1
-
 # Input is an integer representing the target week.
 # 0 -> current week
 # 1 -> next week
@@ -21,19 +10,19 @@ buildData = (which)->
   # today's floored unix timestamp
   timestamp = start / 1000
   # today's day index
-  dayNumber = moveSundayBack(now.getDay())
+  dayNumber = now.getDay()
   # move this back to the last monday
   mondayTimestamp = timestamp - (dayNumber) * secondsPerDay
 
   # make bucket for every day, but leave task aggregating to the days
   buckets = [
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0},
-    {'name':'','timestamp':0}
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false},
+    {'name':'','timestamp':0,'today':false}
   ]
 
   firstIndex = 0 + 7 * which
@@ -49,16 +38,20 @@ buildData = (which)->
     # TODO support negative week indices by adding to this modulus
     buckets[day%7]['name'] = dayNames[day]
 
+  # add today flag
+  if which is 0
+    buckets[dayNumber]['today'] = true
+
   buckets
 
 getDayNames = (mondayTimestamp)->
   msPerDay = 86400000
-  weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   dayNames = []
   currentDate = new Date(mondayTimestamp)
 
   for x in [0..6]
-    dayName = weekdays[moveSundayBack(currentDate.getDay())]
+    dayName = weekdays[currentDate.getDay()]
     dayMonth = currentDate.getMonth() + 1
     dayDate = currentDate.getDate()
     name = dayName + " " + dayMonth + "/" + dayDate
@@ -89,15 +82,16 @@ Template.homePage.events(
     # today's floored unix timestamp
     timestamp = start / 1000
     # today's day index
-    dayNumber = moveSundayBack(now.getDay())
-    # move this back to the last monday
+    dayNumber = now.getDay()
+    # move this back to the last Sunday
     weekBeginning = timestamp - (dayNumber) * secondsPerDay
     weekEnd = weekBeginning + 7*secondsPerDay
 
     nextBeginning = weekBeginning + 7*secondsPerDay
     nextEnd = weekEnd + 7*secondsPerDay
 
-    firstWeekQuery = { dueDate: { $gte: weekBeginning, $lt: weekEnd} }
+    # don't get tasks for days that are already past
+    firstWeekQuery = { dueDate: { $gte: timestamp, $lt: weekEnd} }
     secondWeekQuery = { dueDate: { $gte: nextBeginning, $lt: nextEnd}}
 
     firstWeekTasks = Tasks.find(firstWeekQuery, { sort: { due: -1 } }).fetch()
