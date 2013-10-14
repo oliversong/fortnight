@@ -16,7 +16,7 @@ Meteor.Router.filters
     else
       return 'accessDenied'
   'clearErrors': (page)->
-    Meteor.Errors.clear()
+    Errors.clearSeen()
     return page
 
 Meteor.Router.filter('requireLogin', {only: ['settings','home']})

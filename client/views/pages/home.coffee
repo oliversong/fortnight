@@ -158,7 +158,7 @@ Template.homePage.events(
 
         Meteor.call('makePlan', info, (error, id)->
           if error
-            Meteor.Errors.throw(error.reason)
+            Errors.throw(error.reason)
 
             if error.error is 302
               Meteor.Router.to('home', error.details)
@@ -212,7 +212,7 @@ Template.homePage.events(
 
       Meteor.call('makePlan', info, (error, id)->
         if error
-          Meteor.Errors.throw(error.reason)
+          Errors.throw(error.reason)
 
           if error.error is 302
             Meteor.Router.to('home', error.details)

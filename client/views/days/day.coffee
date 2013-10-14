@@ -68,7 +68,7 @@ swapBack = (e, which, timestamp)->
     # make a new task
     Meteor.call 'makeTask', task, (error, id)->
       if error
-        Meteor.Errors.throw(error.reason)
+        Errors.throw(error.reason)
 
         if error.error is 302
           Meteor.Router.to('home', error.details)
