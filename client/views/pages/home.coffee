@@ -34,6 +34,7 @@ buildData = (which)->
 
   # add day names to buckets
   dayNames = getDayNames(buckets[0]['timestamp']*1000)
+  console.log dayNames
   for day in [0..6]
     # TODO support negative week indices by adding to this modulus
     buckets[day%7]['name'] = dayNames[day]
@@ -46,6 +47,8 @@ buildData = (which)->
 
 getDayNames = (mondayTimestamp)->
   msPerDay = 86400000
+  msPerHour = 3600000
+  msPerMinute = 60000
   weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   dayNames = []
   currentDate = new Date(mondayTimestamp)
@@ -57,7 +60,13 @@ getDayNames = (mondayTimestamp)->
     name = dayName + " " + dayMonth + "/" + dayDate
     dayNames.push(name)
     # go to tomorrow
-    currentDate = new Date(currentDate.getTime() + msPerDay)
+    newDate = new Date(currentDate.getTime() + msPerDay)
+    # check for DST change
+    if newDate.getTimezoneOffset() isnt currentDate.getTimezoneOffset()
+      offset = newDate.getTimezoneOffset() - currentDate.getTimezoneOffset() # time different in minutes
+    else
+      offset = 0
+    currentDate = new Date(currentDate.getTime() + msPerDay + offset * msPerMinute)
 
   dayNames
 
