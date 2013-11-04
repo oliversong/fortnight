@@ -31,6 +31,8 @@ Meteor.methods(
       planDates: []
     )
 
+    task.dueDate += 43200 # put it in the middle of the day because fuck DST
+
     taskId = Tasks.insert(task)
     taskId
 

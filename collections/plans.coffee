@@ -28,7 +28,7 @@ Meteor.methods(
       name: relatedTask.name
       taskId: planAttributes.id
       completed: false
-      timestamp: planAttributes.timestamp
+      timestamp: planAttributes.timestamp + 43200 # because DST
       userId: user._id
     planId = Plans.insert(plan)
     planId
