@@ -3,6 +3,8 @@
     "router": {},
     "errors": {},
     "accounts-ui-bootstrap-dropdown": {},
-    "spin": {}
+    "spin": {},
+    "bootstrap-3": {},
+    "iron-router": {}
   }
 }
