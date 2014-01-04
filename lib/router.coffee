@@ -18,6 +18,7 @@ Router.map ()->
   })
 
   @route('homePage', {
+    layoutTemplate: 'homeLayout'
     path: '/home'
   })
 

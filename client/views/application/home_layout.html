@@ -1,0 +1,22 @@
+<template name="homeLayout">
+  <div class="container">
+    {{> header}}
+  </div>
+  <hr id="topLine">
+  <hr id="secondLine">
+  <div class="container">
+    {{> meteorErrors}}
+    {{yield}}
+  </div>
+  <hr id="thirdLine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn autoplan">Autoplan</button>
+        <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-right"></span></button>
+      </div>
+    </div>
+  </div>
+  <hr id="lastLine">
+</template>
