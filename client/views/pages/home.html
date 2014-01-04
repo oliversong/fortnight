@@ -1,27 +1,20 @@
 <template name="homePage">
-  <div class="row-fluid">
-    <div class="span12">
-      <button class="btn autoplan">Autoplan</button>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        {{#each rows}}<!--tr-->
+          {{#each taskGroups}}<!--td-->
+            {{> taskGroup}}
+          {{/each}}
+        {{/each}}
+      </table>
     </div>
   </div>
-  <div class="row-fluid">
-    <div class="span4 weekColumn thisWeek">
-      <h3>Due this week</h3>
-      {{#each firstWeek}}
-        {{> day}}
-      {{/each}}
-    </div>
-    <div class="span4 planColumn thisWeekPlan">
-      <h3>Plan this week</h3>
-      {{#each firstWeek}}
-        {{> planday}}
-      {{/each}}
-    </div>
-    <div class="span4 weekColumn nextWeek">
-      <h3>Due next week</h3>
-      {{#each secondWeek}}
-        {{> day}}
-      {{/each}}
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn autoplan">Autoplan</button>
+      <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-left"></span></button>
+      <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-right"></span></button>
     </div>
   </div>
 </template>
