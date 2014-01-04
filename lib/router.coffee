@@ -7,6 +7,7 @@ Router.configure
 
 Router.map ()->
   @route('landingPage', {
+    layoutTemplate: 'landingLayout'
     path: '/'
     action: ()->
       if Meteor.user()
