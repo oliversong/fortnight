@@ -7,7 +7,6 @@ preserve-inputs
 coffeescript
 accounts-password
 standard-app-packages
-accounts-ui-bootstrap-dropdown
 errors
 HTML5-History-API
 page-js-ie-support
@@ -15,3 +14,4 @@ spin
 autoupdate
 bootstrap-3
 iron-router
+accounts-ui-bootstrap-3
