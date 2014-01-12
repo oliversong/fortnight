@@ -2,20 +2,29 @@
   <div class="row">
     <div class="col-md-12">
       <table class="table">
-        <thead>
-          <tr>
-            <th>DUE THIS WEEK</th>
-            <th>PLAN THIS WEEK</th>
-            <th>DUE NEXT WEEK</th>
-          </tr>
-        </thead>
         <tbody>
-          {{#each rows}}<!--tr-->
-            {{#each taskGroups}}<!--td-->
-              {{> taskGroup}}
-            {{/each}}
+        {{#with data}}
+          {{#each augmentedCountit }}<!--tr-->
+          <tr>
+            <td style="width:33%">
+              {{> day }}
+            </td>
+            <td style="width:1%">
+              <div class="colors"></div>
+            </td>
+            <td style="width:32%">
+              {{> planday }}
+            </td>
+            <td style="width:1%">
+              <div class="colors"></div>
+            </td>
+            <td style="width:33%">
+              {{> nextday }}
+            </td>
+          </tr>
           {{/each}}
-          </tbody>
+        {{/with}}
+        </tbody>
       </table>
     </div>
   </div>

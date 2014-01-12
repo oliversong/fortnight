@@ -3,6 +3,23 @@
     {{> header}}
   </div>
   <hr id="topLine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:33%">DUE THIS WEEK</th>
+              <th style="width:1%">
+              <th style="width:32%">PLAN THIS WEEK</th>
+              <th style="width:1%">
+              <th style="width:33%">DUE NEXT WEEK</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
   <hr id="secondLine">
   <div class="container">
     {{> meteorErrors}}
@@ -13,8 +30,8 @@
     <div class="row">
       <div class="col-md-12">
         <button class="btn autoplan">Autoplan</button>
-        <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-left"></span></button>
-        <button class="btn autoplan"><span class="glyphicon glyphicon-chevron-right"></span></button>
+        <button class="btn previousWeek"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        <button class="btn nextWeek"><span class="glyphicon glyphicon-chevron-right"></span></button>
       </div>
     </div>
   </div>

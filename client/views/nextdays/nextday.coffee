@@ -1,7 +1,7 @@
-Template.day.helpers(
+Template.nextday.helpers(
   heatmap: ()->
     #me
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     dayBeginning = me.timestamp
     dayEnd = me.timestamp + 86400
     mongoQuery = { dueDate: { $gte: dayBeginning, $lt: dayEnd} }
@@ -17,7 +17,7 @@ Template.day.helpers(
     color
 
   todayTasks: ()->
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     dayBeginning = me.timestamp
     dayEnd = me.timestamp + 86400
     # build query
@@ -27,7 +27,7 @@ Template.day.helpers(
     tasks
 
   today: ()->
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     if me.today
       console.log "today!"
       ' Today!'
@@ -35,7 +35,7 @@ Template.day.helpers(
       ''
 
   name: ()->
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     me.name
 )
 
@@ -86,7 +86,7 @@ swapBack = (e, which, timestamp)->
     $($inputter.children()[2]).val('')
     $cover.hide()
 
-Template.day.events(
+Template.nextday.events(
   'click .herp': (e)->
     $day = $(e.currentTarget).parent()
     $herp_el = $($day.children()[$day.children().length-3])
@@ -98,11 +98,11 @@ Template.day.events(
     $cover.show()
 
   'click .dayInputCover': (e)->
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     swapBack(e, 'cover', me.timestamp)
 
   'keypress .checker': (e)->
-    me = this.parent.first[this.index]
+    me = this.parent.second[this.index]
     if (e.keyCode == 13)
       swapBack(e, 'keypress', me.timestamp)
 
