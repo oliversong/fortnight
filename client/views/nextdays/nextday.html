@@ -1,17 +1,24 @@
 <template name="nextday">
-  <div class="day {{ heatmap }}">
-    <span class="dayName">{{ name }}</span><span class="todayTag">{{ today }}</span>
-    {{#each todayTasks}}
-      {{> task}}
-    {{/each}}
+<table class="table innertable">
+  <tr>
+    <td class="color {{heatmap}}" width=12></td>
+    <td class="padcol">
+      <div class="day">
+        <span class="dayName">{{ name }}</span><span class="todayTag">{{ today }}</span>
+        {{#each todayTasks}}
+          {{> task}}
+        {{/each}}
 
-    <!-- task inputter -->
-    <div class="herp">New Task</div>
-    <div class="input-append taskInputter">
-        <input class="span6 checker" type="text" placeholder="Task name">
-        <span class="add-on"> ~ </span>
-        <input class="span3 estimate checker" placeholder="1 hour" type="text">
-    </div>
-    <div class="inputCover dayInputCover"></div>
-  </div>
+        <!-- task inputter -->
+        <div class="herp">New Task</div>
+        <div class="input-append taskInputter">
+            <input class="span6 checker" type="text" placeholder="Task name">
+            <span class="add-on"> ~ </span>
+            <input class="span3 estimate checker" placeholder="1 hour" type="text">
+        </div>
+        <div class="inputCover dayInputCover"></div>
+      </div>
+    </td>
+  </tr>
+</table>
 </template>

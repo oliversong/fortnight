@@ -10,7 +10,7 @@ Template.day.helpers(
     for task in tasks
       totalTime += task.duration
     color = switch
-      when totalTime is 0 then 'white'
+      when totalTime is 0 then 'free'
       when totalTime < 3601 then 'green'
       when totalTime < 10801 then 'yellow'
       else 'red'
