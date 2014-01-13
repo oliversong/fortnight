@@ -9,12 +9,12 @@ Router.map ()->
   @route('landingPage', {
     layoutTemplate: 'landingLayout'
     path: '/'
-    action: ()->
-      if Meteor.user()
-        console.log('user found?')
-        @redirect('homePage')
-      else
-        @render()
+    # action: ()->
+    #   if Meteor.user()
+    #     console.log('user found?')
+    #     @redirect('homePage')
+    #   else
+    #     @render()
   })
 
   @route('homePage', {
