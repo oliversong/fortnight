@@ -9,6 +9,7 @@ html, body{
   height: 100%;
   width: 100%;
   background-color: #f9f8fa;
+  color: #322e35;
 }
 body{
   font-family: 'proxima-nova', sans-serif;
@@ -52,7 +53,7 @@ th {
 
 .day, .planday{
   min-height: 100px;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-right: 20px;
   float: left;
   width: 100%;
@@ -64,12 +65,14 @@ th {
   font-family: 'proxima-nova';
   color: #8c828e;
   font-size: 18px;
+  float: left;
 }
 .todayTag{
   font-weight: 300;
   font-family: 'proxima-nova';
   font-size: 18px;
   color: #e7a550;
+  float: left;
 }
 .inputCover{
   position: fixed;
@@ -165,24 +168,55 @@ th {
   border-radius: 0px 4px 4px 0px !important;
   border-left:none !important;
 }
-.herp{
-  display: inherit;
-  width: 100%;
-  height: 30px;
-  float: left;
-  opacity: 0.2;
-  color: #333;
-}
-.herp:hover{
-  background-color: #FFF;
-  cursor: pointer;
-  opacity: 0.6;
-}
 .taskInputter{
-  display:none;
+  display: none;
   position:relative;
   z-index:3;
-  float:left;
+  float: left;
+  clear: both;
+  width: 100%;
+
+  input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e1dee4;
+    outline: 0;
+    font-family: 'museo-sans';
+  }
+}
+.herp{
+  opacity: 0.4;
+  position:relative;
+  z-index:3;
+  float: left;
+  clear: both;
+  width: 100%;
+  color: #e1dee4;
+
+  input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e1dee4;
+    outline: 0;
+    font-family: 'museo-sans';
+  }
+  input:hover{
+    cursor: pointer;
+  }
+}
+.taskInputter:hover{
+  cursor: pointer;
+}
+.herp:hover{
+  cursor: pointer;
+  opacity: 1;
+}
+.newTaskField{
+  width: 75%;
+}
+.newEstimateField{
+  width: 17%;
+  margin-left: 11px;
 }
 .checked{
   text-decoration:line-through !important;

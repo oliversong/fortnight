@@ -39,6 +39,14 @@ Template.nextday.helpers(
   name: ()->
     me = this.parent.second[this.index]
     me.name
+
+  # taskCount: ()->
+  #   # 5 - the number of tasks with a minimum of 1
+  #   tmp = 5 - this.count
+  #   if tmp <= 0
+  #     [0...1]
+  #   else
+  #     [0...tmp]
 )
 
 swapBack = (e, which, timestamp)->
@@ -56,7 +64,7 @@ swapBack = (e, which, timestamp)->
 
   # get task info
   taskName = $inputter.children()[0].value
-  taskDuration = $inputter.children()[2].value
+  taskDuration = $inputter.children()[1].value
   if taskName == ''
     # if no name, exit without doing anything
     $herp.show()
@@ -82,19 +90,19 @@ swapBack = (e, which, timestamp)->
     # heat should be reactively inserted!!
 
     # wrap up
+    $($inputter.children()[0]).val('')
+    $($inputter.children()[1]).val('')
     $herp.show()
     $inputter.hide()
-    $($inputter.children()[0]).val('')
-    $($inputter.children()[2]).val('')
     $cover.hide()
 
 Template.nextday.events(
   'click .herp': (e)->
     $day = $(e.currentTarget).parent()
-    $herp_el = $($day.children()[$day.children().length-3])
+    $herp = $($day.children()[$day.children().length-3])
     $inputter = $($day.children()[$day.children().length-2])
     $cover = $($day.children()[$day.children().length-1])
-    $herp_el.hide()
+    $herp.hide()
     $inputter.show()
     $inputter.children()[0].focus()
     $cover.show()

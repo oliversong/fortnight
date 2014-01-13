@@ -59,7 +59,7 @@ swapBack = (task, which)->
   $input_cover = $(ho[3])
 
   new_name = $($edit_fields.children()[0])
-  new_estimate = $($edit_fields.children()[2])
+  new_estimate = $($edit_fields.children()[1])
 
   Meteor.call('update', task._id, new_name.val(), new_estimate.val())
   $task_name.show()
