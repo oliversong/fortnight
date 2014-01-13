@@ -14,7 +14,7 @@ Meteor.methods(
       throw new Meteor.Error(401, "You need to log in to create tasks")
     # don't allow two plans on the same day
     planWithSameDate = Plans.findOne(
-      timestamp: planAttributes.timestamp
+      timestamp: planAttributes.timestamp + 43200
       taskId: planAttributes.id
     )
     if planWithSameDate
@@ -28,7 +28,7 @@ Meteor.methods(
       name: relatedTask.name
       taskId: planAttributes.id
       completed: false
-      timestamp: planAttributes.timestamp + 43200 # because DST
+      timestamp: planAttributes.timestamp + 43200 # because DST, to set the time in the middle of the day
       userId: user._id
     planId = Plans.insert(plan)
     planId

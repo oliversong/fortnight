@@ -11,9 +11,11 @@ Template.nextday.helpers(
       totalTime += task.duration
     color = switch
       when totalTime is 0 then 'free'
-      when totalTime < 3601 then 'green'
-      when totalTime < 10801 then 'yellow'
-      else 'red'
+      when totalTime < 3601 then 'onehour'
+      when totalTime < 7201 then 'twohours'
+      when totalTime < 10801 then 'threehours'
+      when totalTime < 14401 then 'fourhours'
+      else 'fivehours'
     color
 
   todayTasks: ()->

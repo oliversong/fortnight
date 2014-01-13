@@ -12,13 +12,9 @@ Template.day.helpers(
     color = switch
       when totalTime is 0 then 'free'
       when totalTime < 3601 then 'onehour'
-      when totalTime < 5401 then 'onefive'
       when totalTime < 7201 then 'twohours'
-      when totalTime < 9001 then 'twofive'
       when totalTime < 10801 then 'threehours'
-      when totalTime < 12601 then 'threefive'
       when totalTime < 14401 then 'fourhours'
-      when totalTime < 16201 then 'fourfive'
       else 'fivehours'
     color
 
