@@ -1,8 +1,24 @@
+@font-face{
+  font-family: GeoSlab;
+  src: url('/geoslab.ttf');
+}
+hr{
+  border-top: 1px solid #e1dee4;
+}
+html, body{
+  height: 100%;
+  width: 100%;
+  background-color: #f9f8fa;
+}
+body{
+  font-family: 'proxima-nova', sans-serif;
+}
 .table > thead > tr > th {
   border: none;
 }
 .table {
   margin-bottom: 0px;
+  background-color: #f9f8fa !important;
 }
 td {
   border: none !important;
@@ -23,9 +39,17 @@ th {
 }
 .brand{
   float: left;
-  font-size: 30px;
-  font-weight: lighter;
+  font-size: 32px;
+  font-family: "museo-sans",sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  color: #3e2d41;
 }
+.brand:hover{
+  text-decoration: none;
+  color: #3e2d41;
+}
+
 .day, .planday{
   min-height: 100px;
   margin-top: 5px;
@@ -34,11 +58,17 @@ th {
   width: 100%;
 }
 .dayName, .plandayName{
-  text-decoration: underline;
-  font-weight: bold;
+  text-decoration: none;
+  font-weight: 300;
+  font-family: 'proxima-nova';
+  color: #8c828e;
+  font-size: 18px;
 }
 .todayTag{
-  color: green;
+  font-weight: 300;
+  font-family: 'proxima-nova';
+  font-size: 18px;
+  color: #e7a550;
 }
 .inputCover{
   position: fixed;
@@ -53,6 +83,8 @@ th {
 .task{
   float:left;
   width:100%;
+  font-family: 'museo-sans';
+  font-size: 14px;
 }
 .task:hover{
   background-color:#EEE;
@@ -85,8 +117,11 @@ th {
 .task span{
   text-decoration:none;
 }
-.taskName{
-  width:90%;
+.task .taskName{
+  width: 92%;
+  border-bottom: #e1dee4 solid 1px;
+  padding-left: 5px;
+  margin-left: 3px;
 }
 .checked{
   text-decoration:line-through !important;
@@ -130,17 +165,22 @@ th {
   text-decoration:underline;
 }
 .free{
-  background-color: #d1f9fa;
+  background-color:#cdf3ff;
 }
-.green{
-  background-color: #d6f5d8;
+.onehour{
+  background-color:#dfebbf;
 }
-.yellow{
-  background-color: #f8f4ba;
+.twohours{
+  background-color:#f2f0b1;
 }
-
-.red{
-  background-color: #f7aeae;
+.threehours{
+  background-color:#fceab4;
+}
+.fourhours{
+  background-color:#fcdeb0;
+}
+.fivehours{
+  background-color:#f5bebf;
 }
 .ui-state-hover{
   border: 1px dashed #CCC;
@@ -154,18 +194,33 @@ th {
   color: #000;
   font-weight:normal;
 }
-
 .nav-brand-icon{
   position: absolute;
   margin-left: -23px;
   left: 50%;
 }
-
 .brand-icon{
   background-image: url("/fortnight_moon.png");
   width: 46px;
   height: 49px;
 }
+.dropdown-toggle{
+  font-family: 'proxima-nova';
+  font-size: 18px;
+  color: #635b65;
+}
+.dropdown-toggle:hover{
+  color: #635b65;
+}
+th{
+  font-family: 'proxima-nova';
+  font-size: 18px;
+  font-weight: 600;
+  color: #635b65;
+}
 .color{
   padding: 0px !important;
+}
+.pushdown{
+  margin-top:20px;
 }

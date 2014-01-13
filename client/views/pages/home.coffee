@@ -65,7 +65,7 @@ getDayNames = (mondayTimestamp)->
   msPerDay = 86400000
   msPerHour = 3600000
   msPerMinute = 60000
-  weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  weekdays = ["SUN", "MON", "TUES", "WED", "THUR", "FRI", "SAT"]
   dayNames = []
   currentDate = new Date(mondayTimestamp)
 

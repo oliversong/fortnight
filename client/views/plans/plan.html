@@ -1,7 +1,8 @@
 <template name="plan">
   <div class="plan" id="{{ _id }}">
     <input class="toggle pull-left" type="checkbox" {{ checked }}>
-    <div class="taskName pull-left {{ checked }}">{{ name }}</div>
-    <i class="pull-right icon-remove-sign deletePlan"></i>
+    <div class="taskName pull-left {{ checked }}">{{ name }}
+      <i class="pull-right icon-remove-sign deletePlan"></i>
+    </div>
   </div>
 </template>

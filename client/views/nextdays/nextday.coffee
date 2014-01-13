@@ -30,7 +30,7 @@ Template.nextday.helpers(
     me = this.parent.second[this.index]
     if me.today
       console.log "today!"
-      ' Today!'
+      ' TODAY'
     else
       ''
 
