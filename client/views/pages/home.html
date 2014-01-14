@@ -1,25 +1,61 @@
 <template name="homePage">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table">
-        <tbody>
-        {{#with data}}
-          {{#each augmentedCountit }}<!--tr-->
-          <tr>
-            <td style="width:34%">
-              {{> day }}
-            </td>
-            <td class="padcol planback" style="width:31%">
-              {{> planday }}
-            </td>
-            <td style="width:35%">
-              {{> nextday }}
-            </td>
-          </tr>
-          {{/each}}
-        {{/with}}
-        </tbody>
-      </table>
+  <div class="container">
+    {{> header}}
+  </div>
+  <hr id="topLine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:33%">DUE THIS WEEK</th>
+              <th style="width:1%">
+              <th class="padcol" style="width:31%">PLAN THIS WEEK</th>
+              <th style="width:1%">
+              <th class="padcol" style="width:34%;">DUE NEXT WEEK</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   </div>
+  <hr id="secondLine" style="margin-bottom:0px;margin-top:18px;">
+  <div class="container">
+    {{> meteorErrors}}
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+          {{#with data}}
+            {{#each augmentedCountit }}<!--tr-->
+            <tr>
+              <td style="width:34%">
+                {{> day }}
+              </td>
+              <td class="padcol planback" style="width:31%">
+                {{> planday }}
+              </td>
+              <td style="width:35%">
+                {{> nextday }}
+              </td>
+            </tr>
+            {{/each}}
+          {{/with}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <hr id="thirdLine" style="margin-top:0px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a class="autoplan pull-left">AUTOPLAN</a>
+        <div class="chevron-right pull-right"></div>
+        <div class="chevron-left pull-right"></div>
+      </div>
+    </div>
+  </div>
+  <hr id="lastLine">
 </template>

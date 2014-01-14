@@ -7,19 +7,13 @@ Router.configure
 
 Router.map ()->
   @route('landingPage', {
-    layoutTemplate: 'landingLayout'
+    layoutTemplate: 'layout'
     path: '/'
-    # action: ()->
-    #   if Meteor.user()
-    #     console.log('user found?')
-    #     @redirect('homePage')
-    #   else
-    #     @render()
-  })
-
-  @route('homePage', {
-    layoutTemplate: 'homeLayout'
-    path: '/home'
+    action: ()->
+      if Meteor.user()
+        @render('homePage')
+      else
+        @render('landingPage')
   })
 
   @route('settings', {
