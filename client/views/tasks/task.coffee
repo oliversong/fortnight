@@ -68,5 +68,6 @@ swapBack = (task, which)->
 
 Template.task.rendered = ()->
   $(this.find('.task')).draggable(
-    revert: true
+    revert: true,
+    revertDuration: 0
   )
