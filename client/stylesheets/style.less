@@ -45,6 +45,7 @@ th {
   font-style: normal;
   font-weight: 100;
   color: #3e2d41;
+  -webkit-font-smoothing: antialiased;
 }
 .brand:hover{
   text-decoration: none;
@@ -240,7 +241,7 @@ th {
   text-decoration:underline;
 }
 .free{
-  background-color:#cdf3ff;
+  background-color:##cdf3ff;
 }
 .onehour{
   background-color:#dfebbf;
@@ -259,7 +260,7 @@ th {
 }
 .ui-state-hover{
   border: 1px dashed #CCC;
-  background: #EEE;
+  background: #EBE8EC;
   color: #000;
   font-weight:normal;
 }
@@ -346,6 +347,10 @@ th{
   height: 90%;
   max-height: 1000px;
   min-height: 678px;
+  background-image: url('/clouds.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent !important;
 }
 .huge{
   font-family: GeoSlab;
@@ -370,6 +375,8 @@ th{
 }
 .center-this{
   text-align: center;
+}
+.shift-down{
   top: 38%;
 }
 .learnbutton{
@@ -394,6 +401,20 @@ th{
   padding-bottom: 21px;
   border: 1px solid #f5f0fa;
   margin-left: 80px;
+}
+.signupbutton-bottom{
+  color: #5c595e;
+  font-size: 22px;
+  position: relative;
+  padding-top: 21px;
+  display: block;
+  float: left;
+  width: 200px;
+  padding-bottom: 21px;
+  border: 1px solid #7d7881;
+  margin-left: 80px;
+  font-family: 'proxima-nova';
+  font-weight: 400;
 }
 .learnbutton:hover, .signupbutton:hover{
   text-decoration: none;
@@ -423,6 +444,44 @@ th{
   margin-left: -10px;
   opacity: 0.7;
 }
-.big-video-control-container{
+#big-video-control-container{
   display:none !important;
+}
+#big-video-vid{
+  left: 0 !important;
+}
+.contract{
+  font-family: "museo-sans";
+  font-size: 24px;
+  color: #392c46;
+  font-weight: 100;
+  line-height: 30px;
+  margin-bottom: 0px;
+}
+.aliase{
+  -webkit-font-smoothing: antialiased;
+}
+.purple-this{
+  color: #a57acb;
+}
+.boom-text{
+  font-family: "museo-sans";
+  font-size: 40px;
+  font-weight: 100;
+  line-height: 40px;
+  margin-bottom:10px;
+}
+.beam-text{
+  font-family: "museo-sans";
+  font-size: 20px;
+  color: #392c46;
+  font-weight: 100;
+  line-height: 20px;
+  clear: both;
+}
+.whitespace{
+  margin-top: 170px;
+}
+.align-right{
+  text-align: right;
 }

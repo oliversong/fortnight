@@ -8,6 +8,7 @@ Router.configure
 Router.map ()->
   @route('landingPage', {
     layoutTemplate: 'layout'
+    loadingTemplate: 'loading'
     path: '/'
     action: ()->
       if Meteor.user()
