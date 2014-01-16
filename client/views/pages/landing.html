@@ -13,7 +13,7 @@
       <div class="downArrow"></div>
     </div>
   </div>
-  <div class="container">
+  <div class="container" id="scroll-target">
     <div class="row">
       <div class="col-md-12">
       {{> header }}
@@ -29,30 +29,30 @@
       </div>
     </div>
     <div class="row whitespace">
-      <div class="col-md-5">
+      <div class="col-md-5 push-this-down">
         <div class="boom-text purple-this">Discover free time</div>
         <div class="beam-text">Stop feeling bad about not doing those long-term projects. Fortnight will give you the peace of mind to enjoy truly free time.</div>
       </div>
       <div class="col-md-7">
-
+        <div class="discovergif"></div>
       </div>
     </div>
     <div class="row whitespace">
       <div class="col-md-7">
-
+        <div class="heatmapgif"></div>
       </div>
-      <div class="col-md-5 align-right">
+      <div class="col-md-5 align-right push-this-down">
         <div class="boom-text purple-this">Know your limits</div>
         <div class="beam-text">Totally roasted this week? Fortnight prevents work from sneaking up on you. With heat-mapping, you’ll know exactly what’s going on- all the time.</div>
       </div>
     </div>
     <div class="row whitespace">
-      <div class="col-md-5">
+      <div class="col-md-5 push-this-down">
         <div class="boom-text purple-this">React with time to spare</div>
         <div class="beam-text">Fortnight gives you awareness. With that awareness comes preemptive power. Huge project due next Thursday? Split it up and finish it by the weekend.</div>
       </div>
       <div class="col-md-7">
-
+        <div class="planninggif"></div>
       </div>
     </div>
   </div><!--close container-->
@@ -62,8 +62,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 contract center-this">
-        <div class="contract aliase pull-left">Sound good?</div>
-        <a class="signupbutton-bottom pull-left"> SIGN UP </a>
+        <div style=" float: left; position: relative; left: 50%; margin-left: -200px; ">
+          <span class="contract aliase pull-left" style="margin-top:21px;">Sound good?</span>
+          <a class="signupbutton-bottom pull-left"> SIGN UP </a>
+        </div>
       </div>
     </div>
   </div><!--close container-->
