@@ -5,8 +5,8 @@ Template.landingPage.rendered = ()->
   BV.show('/clouds.mp4', {altSource:'/clouds.ogg', ambient:true})
 
 Template.landingPage.events(
-  'click .learnbutton': (e)->
-     $('html, body').animate(
-       scrollTop: $("#scroll-target").offset().top
-     , 2000)
+  # 'click .learnbutton': (e)->
+  #    $('html, body').animate(
+  #      scrollTop: $("#scroll-target").offset().top
+  #    , 2000)
 )

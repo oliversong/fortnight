@@ -41,6 +41,9 @@ Router.map ->
         Router.go AccountsEntry.settings.homeRoute
       @stop()
 
+  @route 'aboutPage',
+    path: '/about'
+
   @route 'not_found',
     path: '*'
 
