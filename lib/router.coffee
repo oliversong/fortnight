@@ -5,25 +5,44 @@ Router.configure
   # waitOn: ->
   #   return [Meteor.subscribe('notifications')]
 
-Router.map ()->
-  @route('landingPage', {
+Router.map ->
+  @route 'landingPage',
     layoutTemplate: 'layout'
     loadingTemplate: 'loading'
     path: '/'
-    action: ()->
-      if Meteor.user()
-        @render('homePage')
-      else
-        @render('landingPage')
-  })
 
-  @route('settings', {
+  @route 'homePage',
+    layoutTemplate: 'layout'
+    loadingTemplate: 'loading'
+    path: '/home'
+
+  @route 'settings',
     path: '/settings'
-  })
 
-  @route('not_found', {
+  @route 'loginPage',
+    path: '/login'
+    layoutTemplate: 'layout'
+    before: ->
+      Session.set('entryError', undefined)
+      Session.set('buttonText', 'in')
+
+  @route "registerPage",
+    path: "/register"
+    before: ->
+      Session.set('entryError', undefined)
+      Session.set('buttonText', 'up')
+
+  @route 'logout',
+    path: '/logout'
+    before: ->
+      Session.set('entryError', undefined)
+      if AccountsEntry.settings.homeRoute
+        Meteor.logout()
+        Router.go AccountsEntry.settings.homeRoute
+      @stop()
+
+  @route 'not_found',
     path: '*'
-  })
 
 clearErrors = ()->
   Errors.clearSeen()

@@ -1,0 +1,29 @@
+<template name="modAcctButtons">
+  {{#if currentUser}}
+
+    {{#if profileUrl}}
+      {{#if wrapLinks}}<li>{{/if}}
+        <a class='profileLink' href='{{profileUrl}}'>{{signedInAs}}</a>
+      {{#if wrapLinks}}</li>{{/if}}
+    {{else}}
+      {{#if wrapLinks}}<li>{{/if}}
+        <p class="navbar-text">{{signedInAs}}</p>
+      {{#if wrapLinks}}</li>{{/if}}
+    {{/if}}
+
+    {{#if wrapLinks}}<li>{{/if}}
+      <a href="/logout">LOG OUT</a>
+    {{#if wrapLinks}}</li>{{/if}}
+
+  {{else}}
+
+    {{#if wrapLinks}}<li>{{/if}}
+      <a href="/register">SIGN UP</a>
+    {{#if wrapLinks}}</li>{{/if}}
+
+    {{#if wrapLinks}}<li>{{/if}}
+      <a href="/login">LOG IN</a>
+    {{#if wrapLinks}}</li>{{/if}}
+
+  {{/if}}
+</template>
