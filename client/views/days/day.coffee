@@ -32,7 +32,6 @@ Template.day.helpers(
   today: ()->
     me = this.parent.first[this.index]
     if me.today
-      console.log "today!"
       ' TODAY'
     else
       ''

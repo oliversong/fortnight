@@ -31,7 +31,6 @@ Template.nextday.helpers(
   today: ()->
     me = this.parent.second[this.index]
     if me.today
-      console.log "today!"
       ' TODAY'
     else
       ''
