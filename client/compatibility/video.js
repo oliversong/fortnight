@@ -358,6 +358,10 @@ $("videojs.CaptionsTrack",u.Pb);$("videojs.SubtitlesTrack",u.Xb);$("videojs.Chap
         if (settings.useFlashForFirefox && (isFirefox)) {
           videoTechOrder = ['flash', 'html5'];
         }
+
+        // videojs object persists throughout different page transitions!
+        // reset this mofo
+        videojs.La = {}
         player = videojs(vidEl.substr(1), {
           controls:false,
           autoplay:true,
