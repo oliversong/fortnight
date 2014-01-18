@@ -39,13 +39,13 @@ Template.registerPage.events
   'submit #signUp': (event, t) ->
     event.preventDefault()
 
-    username =
-      if t.find('input[name="username"]')
-        t.find('input[name="username"]').value
+    email =
+      if t.find('input[name="email"]')
+        t.find('input[name="email"]').value
       else
         undefined
 
-    email = ''
+    username = ''
 
     password = t.find('input[name="password"]').value
     confirm = t.find('input[name="confirmPassword"]').value
@@ -55,14 +55,19 @@ Template.registerPage.events
     trimInput = (val)->
       val.replace /^\s*|\s*$/g, ""
 
-    usernameRequired = _.contains([
-      'USERNAME_AND_EMAIL',
-      'USERNAME_ONLY'], fields)
+    email = trimInput email
 
-    if usernameRequired
-      unless username
-        Session.set('entryError', 'Username is required')
-        return
+    emailRequired = _.contains([
+      'USERNAME_AND_EMAIL',
+      'EMAIL_ONLY'], fields)
+
+    if emailRequired && email.length is 0
+      Session.set('entryError', 'Email is required')
+      return
+
+    if email.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gi) is null
+      Session.set('entryError', 'Invalid email')
+      return
 
     passwordErrors = do (password)->
       errMsg = []
@@ -92,6 +97,6 @@ Template.registerPage.events
         Session.set('entryError', err.reason)
         return
 
-      Meteor.loginWithPassword(username, password)
+      Meteor.loginWithPassword(email, password)
       Router.go AccountsEntry.settings.dashboardRoute
     )
