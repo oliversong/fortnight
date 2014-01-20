@@ -3,9 +3,6 @@ Codename: caber-demo, the Meteor version of Project Demoknight. Fortnight is a s
 
 # TODO
 
-## Bugs
-* Fix autoplan
-
 ## v1.1 release milestone
 * Improve estimation parsing
 * Email schedules for the day, special Sunday reminder
