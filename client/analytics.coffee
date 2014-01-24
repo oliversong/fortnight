@@ -2,7 +2,7 @@ Template.layout.rendered= ()->
   ((i, s, o, g, r, a, m) ->
     i["GoogleAnalyticsObject"] = r
     i[r] = i[r] or ->
-      (i[r].q = i[r].q or []).push arguments_
+      (i[r].q = i[r].q or []).push arguments
 
     i[r].l = 1 * new Date()
 
