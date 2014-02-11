@@ -4,8 +4,8 @@ Accounts.ui.config(
 
 AccountsEntry.config(
   homeRoute: '/'
-  dashboardRoute: '/home'
-  profileRoute: '/home'
+  dashboardRoute: '/'
+  profileRoute: '/'
   showSignupCode: false
   wrapLinks: true
 )

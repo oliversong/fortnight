@@ -10,11 +10,13 @@ Router.map ->
     layoutTemplate: 'layout'
     loadingTemplate: 'loading'
     path: '/'
-
-  @route 'homePage',
-    layoutTemplate: 'layout'
-    loadingTemplate: 'loading'
-    path: '/home'
+    action: ()->
+      if Meteor.loggingIn()
+        @render @loadingTemplate
+      if Meteor.user()
+        @render 'homePage'
+      else
+        @render 'landingPage'
 
   @route 'settings',
     path: '/settings'
@@ -59,5 +61,4 @@ requireLogin = ()->
 
     @stop()
 
-Router.before(requireLogin, {only: 'homePage'})
 Router.before(()-> clearErrors())
