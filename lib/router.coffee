@@ -11,12 +11,13 @@ Router.map ->
     loadingTemplate: 'loading'
     path: '/'
     action: ()->
-      if Meteor.loggingIn()
-        @render @loadingTemplate
       if Meteor.user()
         @render 'homePage'
       else
-        @render 'landingPage'
+        if Meteor.loggingIn()
+          @render @loadingTemplate
+        else
+          @render 'landingPage'
 
   @route 'settings',
     path: '/settings'
