@@ -59,15 +59,17 @@ buildData = ()->
   for day in [0..6]
     buckets['second'][day%7]['name'] = secondDayNames[day]
 
+  debugger
   buckets
 
 getDayNames = (mondayTimestamp)->
+  debugger
   msPerDay = 86400000
   msPerHour = 3600000
   msPerMinute = 60000
   weekdays = ["SUN", "MON", "TUES", "WED", "THUR", "FRI", "SAT"]
   dayNames = []
-  currentDate = new Date(mondayTimestamp)
+  currentDate = new Date(mondayTimestamp + 43200000)
 
   for x in [0..6]
     dayName = weekdays[currentDate.getDay()]
